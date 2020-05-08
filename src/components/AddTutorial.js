@@ -12,6 +12,7 @@ const AddTutorial = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = event => {
+    event.preventDefault();
     const { name, value } = event.target;
     setTutorial({ ...tutorial, [name]: value });
   };
@@ -33,8 +34,8 @@ const AddTutorial = () => {
         setSubmitted(true);
         console.log(response.data);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(e => {
+        console.log(e);
       });
   };
 

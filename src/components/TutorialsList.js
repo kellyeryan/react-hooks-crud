@@ -45,8 +45,8 @@ const TutorialsList = () => {
         console.log(response.data);
         refreshList();
       })
-      .catch(error => {
-        console.log(error);
+      .catch(e => {
+        console.log(e);
       });
   };
 
@@ -56,8 +56,8 @@ const TutorialsList = () => {
         setTutorials(response.data);
         console.log(response.data);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(e => {
+        console.log(e);
       });
   };
 
@@ -83,15 +83,16 @@ const TutorialsList = () => {
           </div>
         </div>
       </div>
-      <div className="col-md=6">
+      <div className="col-md-6">
         <h4>Tutorials List</h4>
 
         <ul className="list-group">
           {tutorials &&
             tutorials.map((tutorial, index) => (
-              <li className={
-                "list-group-item " + (index === currentIndex ? "active" : "")
-              }
+              <li
+                className={
+                  "list-group-item " + (index === currentIndex ? "active" : "")
+                }
                 onClick={() => setActiveTutorial(tutorial, index)}
                 key={index}
               >
@@ -99,11 +100,50 @@ const TutorialsList = () => {
               </li>
             ))}
         </ul>
-        <button className="m-3 btn btn-sm btn-danger"
+
+        <button
+          className="m-3 btn btn-sm btn-danger"
           onClick={removeAllTutorials}
         >
           Remove All
         </button>
+      </div>
+      <div className="col-md-6">
+        {currentTutorial ? (
+          <div>
+            <h4>Tutorial</h4>
+            <div>
+              <label>
+                <strong>Title:</strong>
+              </label>{" "}
+              {currentTutorial.title}
+            </div>
+            <div>
+              <label>
+                <strong>Description:</strong>
+              </label>{" "}
+              {currentTutorial.description}
+            </div>
+            <div>
+              <label>
+                <strong>Status:</strong>
+              </label>{" "}
+              {currentTutorial.published ? "Published" : "Pending"}
+            </div>
+
+            <Link
+              to={"/tutorials/" + currentTutorial.id}
+              className="badge badge-warning"
+            >
+              Edit
+            </Link>
+          </div>
+        ) : (
+            <div>
+              <br />
+              <p>Please click on a Tutorial...</p>
+            </div>
+          )}
       </div>
     </div>
   );
