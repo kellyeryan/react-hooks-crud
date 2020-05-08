@@ -33,8 +33,8 @@ const AddTutorial = () => {
         setSubmitted(true);
         console.log(response.data);
       })
-      .catch(e => {
-        console.log(e);
+      .catch(error => {
+        console.log(error);
       });
   };
 
